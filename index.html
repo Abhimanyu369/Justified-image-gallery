@@ -5,89 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Document</title>
-
     <style>
         .img-wrapper {
           display: flex;
           flex-wrap: wrap;
         }
 
-        .img-wrapper > a, .img-wrapper::after {
-          --ratio: calc(var(--w) / var(--h));
-          --row-height: 9rem;
-          flex-basis: calc(var(--ratio) * var(--row-height));
-        }
-
-        .img-wrapper > a {
-          margin: 0.25rem;
-          flex-grow: calc(var(--ratio) * 100);
-        }
-
-        /* To make the last line of image row of proper height. */
-
-        .img-wrapper::after {
-          --w: 2;
-          --h: 1;
-          content: '';
-          flex-grow: 1000000;
-        }
-
-        .img-wrapper > a > img {
+        .img-a > img {
           display: block;
           width: 100%;
         }
 
-        @media only screen and (max-width: 600px) {
-          .img-wrapper {
-            display: block;
-          }
+        /* CSS to maintain the height of last row */
+
+        .img-wrapper::after {
+          flex-basis: 18rem;
         }
 
+        .img-wrapper::after {
+          content: '';
+          flex-grow: 1000000;
+        }
     </style>
 </head>
 <body>
     <div class="img-wrapper">
 
-      <a href="#" style="--w: 200; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/200x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 300; --h: 200">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/300x200/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 500; --h: 400">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/500x400/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 300; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/300x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 300; --h: 400">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/300x400/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 400; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/400x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 200; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/200x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 400; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/400x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 600; --h: 400">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/600x400/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 400; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/400x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 200; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/200x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 400; --h: 300">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/400x300/ccc/000.jpg">
       </a>
-      <a href="#" style="--w: 600; --h: 400">
+      <a class="img-a" href="#" >
         <img src="https://dummyimage.com/600x400/ccc/000.jpg">
       </a>
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".img-a").each(function(i){
+                console.log($(this).children().width(), $(this).children().height());
+
+                var imgW = $(this).children().width();
+                var imgH = $(this).children().height();
+
+                var ratio = imgW/imgH;
+
+                // Set Row Height Here
+                var rowHeight = 10; // changeable value in rem
+
+                // Set Margin between images Here
+                var imgMargin = .25; // changeable value in rem
+
+                $(this).css("flex-basis", (ratio * rowHeight) + 'rem');
+                $(this).css("flex-grow", (ratio * 100));
+                $(this).css("margin", imgMargin + "rem");
+            });
+
+        });
+    </script>
 </body>
 </html>
