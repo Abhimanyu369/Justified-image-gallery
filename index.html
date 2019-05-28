@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Document</title>
+    <title>Justified Image Gallery</title>
     <style>
+        .heading {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
         .img-wrapper {
           display: flex;
           flex-wrap: wrap;
@@ -29,6 +34,10 @@
     </style>
 </head>
 <body>
+    <div class="heading">
+      <h1>Justified Image Gallery</h1>
+    </div>
+
     <div class="img-wrapper">
 
       <a class="img-a" href="#" >
@@ -74,8 +83,10 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
-        $(document).ready(function(){
-            $(".img-a").each(function(i){
+        //$(document).ready(function(){
+        $(window).on('load', function () {
+            
+          $(".img-a").each(function(i){
                 console.log($(this).children().width(), $(this).children().height());
 
                 var imgW = $(this).children().width();
